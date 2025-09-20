@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1d1f20, #3a3d40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+
+    .kalkulator {
+    background: #2b2d2f;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+    width: 320px;
+    }
+
+    .layar {
+    background: #111;
+    color: #cfa825;
+    font-size: 2rem;
+    text-align: right;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    height: 60px;
+    overflow-x: auto;
+    }
+
+    .tombol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    }
+
+    .tombol button {
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background: #444;
+    color: #cfa825;
+    cursor: pointer;
+    }
+
+    
+
+    .tombol button:hover {
+    background: #666;
+    }
+
+    .tombol button:active {
+    transform: scale(0.95);
+    }
+
+    .equal {
+    grid-column: span 2;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="kalkulator">
+    <div class="layar" id="layar">0</div>
+    <div class="tombol">
+    <button class="clear" onclick="clearLayar()">C</button>
+    <button onclick="hapus()">⌫</button>
+    <button onclick="tambahKarakter('%')">%</button>
+    <button class="operator" onclick="tambahKarakter('/')">÷</button>
+
+    <button onclick="tambahKarakter('1')">1</button>
+    <button onclick="tambahKarakter('2')">2</button>
+    <button onclick="tambahKarakter('3')">3</button>
+    <button class="operator" onclick="tambahKarakter('*')">×</button>
+
+    <button onclick="tambahKarakter('4')">4</button>
+    <button onclick="tambahKarakter('5')">5</button>
+    <button onclick="tambahKarakter('6')">6</button>
+    <button class="operator" onclick="tambahKarakter('-')">−</button>
+
+    <button onclick="tambahKarakter('7')">7</button>
+    <button onclick="tambahKarakter('8')">8</button>
+    <button onclick="tambahKarakter('9')">9</button>
+    <button class="operator" onclick="tambahKarakter('+')">+</button>
+
+    <button onclick="tambahKarakter('0')">0</button>
+    <button onclick="tambahKarakter('.')">.</button>
+    <button class="equal" onclick="hitung()">=</button>
+    </div>
+</div>
+
+<script>
+    let layar = document.getElementById("layar");
+
+    function tambahKarakter(kar) {
+    if (layar.textContent === "0") {
+        layar.textContent = kar;
+    } else {
+        layar.textContent += kar;
+    }
+    }
+
+    function clearLayar() {
+    layar.textContent = "0";
+    }
+
+    function hapus() {
+    layar.textContent = layar.textContent.slice(0, -1);
+    if (layar.textContent === "") layar.textContent = "0";
+    }
+
+    function hitung() {
+    try {
+        layar.textContent = eval(layar.textContent.replace("÷", "/").replace("×", "*"));
+    } catch {
+        layar.textContent = "Error";
+    }
+    }
+</script>
+
+</body>
+</html>
